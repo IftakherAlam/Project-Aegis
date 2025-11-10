@@ -1,0 +1,43 @@
+# config/security_rules.yaml
+rules:
+  - name: direct_injection
+    severity: high
+    patterns:
+      - 'ignore\s+(your\s+)?previous\s+instructions?'
+      - 'disregard\s+(all\s+)?(previous|above|prior)\s+(instructions?|commands?)'
+      - 'forget\s+(everything|all|your\s+instructions)'
+      - 'new\s+instructions?:'
+      
+  - name: role_playing
+    severity: high
+    patterns:
+      - 'you\s+are\s+now\s+(a|in|operating)'
+      - 'act\s+as\s+(a|an)\s+\w+'
+      - 'pretend\s+(you\s+are|to\s+be)'
+      - 'developer\s+mode'
+      - 'admin\s+mode'
+      - 'god\s+mode'
+      
+  - name: exfiltration
+    severity: high
+    patterns:
+      - '(output|print|show|reveal|display)\s+(your|the)\s+system\s+prompt'
+      - 'what\s+(are|were)\s+your\s+(initial|original)\s+instructions'
+      - 'repeat\s+(your|the)\s+(instructions|prompt|system\s+message)'
+      - 'show\s+me\s+your\s+prompt'
+      
+  - name: encoding_attack
+    severity: medium
+    patterns:
+      - 'base64|b64decode'
+      - 'rot13|caesar'
+      - '\\x[0-9a-fA-F]{2}'
+      - '\\u[0-9a-fA-F]{4}'
+      
+  - name: jailbreak
+    severity: high
+    patterns:
+      - 'jailbreak'
+      - 'DAN\s+mode'
+      - 'do\s+anything\s+now'
+      - 'bypass\s+(your\s+)?restrictions?'
